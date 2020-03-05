@@ -8,11 +8,12 @@ import java.util.Arrays;
 /**
  * //TODO add comments.
  *
- * @author Petr Arsentev (parsentev@yandex.ru)
+ * @author Yaroslav Starostin (9ruk94@bk.ru)
  * @version $Id$
  * @since 0.1
  */
 public class Logic {
+
     private final int size;
     private final Figure[] figures;
     private int index = 0;
@@ -71,6 +72,26 @@ public class Logic {
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
+        int row = 0;
+        int column = 0;
+        for (int i = 0; i < table.length; i++) {
+            for (int j = 0; j < table.length; j++) {
+                if (table[i][j] == 1) {
+                    row = i;
+                    column = j;
+                    break;
+                }
+            }
+        }
+        int sumrow = 0;
+        int sumcolumn = 0;
+        for (int i = 0; i < table.length; i++) {
+            sumrow = sumrow + table[row][i];
+            sumcolumn = sumcolumn + table[i][column];
+            if (sumcolumn == size || sumrow == size) {
+                result = true;
+            }
+        }
         return result;
     }
 
